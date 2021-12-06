@@ -79,6 +79,12 @@ def GetContours(image):
                     # msg = struct.pack('<d',command)
                     # conn.send(msg)
                     print('Tetha =',math.degrees(tetha))
+                    x, y, w, h = cv2.boundingRect(approx)
+                    ROI = img[y:y+h, x:x+w]
+                    blur = cv2.GaussianBlur(ROI, (25, 25), 0)
+                    img[y:y+h, x:x+w] = blur
+                    cv2.imshow('blur',img)
+
             # Max_x = list1[0][0][0]
             # Min_y = list1[0][0][1]
             # for i in range(len(approx)):
@@ -91,9 +97,7 @@ def GetContours(image):
             # print(Min_y)
             # print(Max_x)
 
-            x,y,w,h = cv2.boundingRect(approx)
-
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(3,800)
 cap.set(4,600)
 
@@ -102,12 +106,12 @@ labels_file.write('filename,angle\n')
 while True:
     start = timer()
     success,img1 =cap.read()
-    img =  img1
+    img = img1
     img2 = img.copy()
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     sharpen_kernel = np.array([[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]])
-    sharpen = cv2.filter2D(img2, -1, sharpen_kernel)
+    # sharpen = cv2.filter2D(img2, -1, sharpen_kernel)
     ret, thresh1 = cv2.threshold(imgGray, 70, 255, cv2.THRESH_BINARY)
     # ret, thresh2 = cv2.threshold(sharpen, 150, 255, cv2.THRESH_BINARY)
     # thresh3 = cv2.adaptiveThreshold(imgGray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 2)
@@ -116,7 +120,7 @@ while True:
     #print(cap.get(cv2.CAP_PROP_FPS))
     # cv2.imshow("Raw Image",img1)
     cv2.imshow("Final Image",img2)
-    # cv2.imshow('Binary Thresholding',thresh1)
+    cv2.imshow('Binary Thresholding',thresh1)
     # cv2.imshow('Canny Edge Detection',imgCanny)
     elapsed_time = timer()-start
     # print(f"elapsed time = {elapsed_time}")
