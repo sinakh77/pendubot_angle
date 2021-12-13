@@ -50,7 +50,7 @@ def GetContours(image):
                     #             (50, 50), cv2.FONT_HERSHEY_SIMPLEX,1,
                     #             (0, 255, 0), 2,
                     #             cv2.LINE_AA)
-                    print('Tetha =', math.degrees(tetha))
+                    # print('Tetha =', math.degrees(tetha))
                     x, y, width, height = cv2.boundingRect(approx)
                     # REGION OF INTEREST
                     ROI = img[y:y + height, x:x + width]
