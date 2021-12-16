@@ -2,6 +2,7 @@ import cv2
 import math
 import numpy as np
 import os
+import random
 
 def GetContours(image):
     contours,hierarchy = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
@@ -52,10 +53,13 @@ def GetContours(image):
                     #             cv2.LINE_AA)
                     # print('Tetha =', math.degrees(tetha))
                     x, y, width, height = cv2.boundingRect(approx)
+                    # adding random width and heigh to the ROI
+                    random_width = random.randint(-20,0)
+                    random_height = random.randint(-20,0)
                     # REGION OF INTEREST
-                    ROI = img[y:y + height, x:x + width]
+                    ROI = img[y:y + (height + random_height), x:x + (width + random_width)]
                     blurred_ROI = blur(ROI)
-                    img[y:y + height, x:x + width] = blurred_ROI
+                    img[y:y + (height + random_height), x:x + (width + random_width)] = blurred_ROI
 
 
 

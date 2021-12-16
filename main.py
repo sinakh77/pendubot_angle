@@ -101,8 +101,8 @@ cap = cv2.VideoCapture(0)
 cap.set(3,800)
 cap.set(4,600)
 
-labels_file = open('labeles.csv', 'w')
-labels_file.write('filename,angle\n')
+# labels_file = open('labeles.csv', 'w')
+# labels_file.write('filename,angle\n')
 while True:
     start = timer()
     success,img1 =cap.read()
@@ -110,7 +110,7 @@ while True:
     img2 = img.copy()
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    sharpen_kernel = np.array([[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]])
+    # sharpen_kernel = np.array([[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]])
     # sharpen = cv2.filter2D(img2, -1, sharpen_kernel)
     ret, thresh1 = cv2.threshold(imgGray, 70, 255, cv2.THRESH_BINARY)
     # ret, thresh2 = cv2.threshold(sharpen, 150, 255, cv2.THRESH_BINARY)
