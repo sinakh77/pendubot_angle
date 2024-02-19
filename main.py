@@ -124,6 +124,7 @@ while True:
     #     image_name = 'Pic_' + str(count) + '.png'
     #     cv2.imwrite(image_name, img2)
     #     labels_file.write(image_name + ',' + str(angle) + '\n')
-
+    
+    print('We are here jsut as a test nothing more')
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
